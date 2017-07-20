@@ -24,6 +24,11 @@ def test():
         return 0
     return 1
 
+@manager.command
+def db_reset():
+    models.db.drop_all()
+    models.db.create_all()
+
 
 
 if __name__ == '__main__':
