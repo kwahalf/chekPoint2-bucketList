@@ -12,7 +12,7 @@ api.add_namespace(ns)
 @ns.route('/')
 @api.response(401, 'user is not legit')
 class Bucketlists(Resource):
-    """docstring for ClassName"""
+    """this class handles the creation and retrival of bucketlists"""
     @api.header('Authorization', 'JWT Token', required=True)
     @api.response(201, 'bucketlist sucessfully created')
     @api.expect(bucket_input)
@@ -39,6 +39,7 @@ class Bucketlists(Resource):
     @api.marshal_list_with(bucket_list)
     @api.expect(pagination_and_search_arguments, validate=True)
     def get(self):
+        """Handle GET request for this resource. Url ---> /bucketlists/"""
         # Get the access token from the header
         access_token = request.headers.get('Authorization')
         if access_token:
@@ -80,10 +81,13 @@ class Bucketlists(Resource):
 @ns.route('/<int:id>')
 @api.response(401, 'user is not legit')
 class BucketlistsManipulation(Resource):
-    """docstring for ClassName"""
+    """This class handles the deletion, updating and retrival of a
+        bucketlist by ID"""
 
     @api.header('Authorization', 'JWT Token', required=True)
     def delete(self, id):
+        """Handle DELETE request for this resource. 
+            Url ---> /bucketlists/<id>"""
         # get the access token from the authorization header
         access_token = request.headers.get('Authorization')
 
@@ -113,6 +117,8 @@ class BucketlistsManipulation(Resource):
     @api.expect(bucket_input)
     @api.header('Authorization', 'JWT Token', required=True)
     def put(self, id):
+        """Handle PUT request for this resource. 
+            Url ---> /bucketlists/<id>"""
         # get the access token from the authorization header
         access_token = request.headers.get('Authorization')
 
@@ -143,6 +149,8 @@ class BucketlistsManipulation(Resource):
     @api.header('Authorization', 'JWT Token', required=True)
     @api.marshal_with(bucket_list)
     def get(self, id):
+        """Handle GET request for this resource. 
+            Url ---> /bucketlists/<id>"""
         # get the access token from the authorization header
         access_token = request.headers.get('Authorization')
 
@@ -178,12 +186,14 @@ class BucketlistsManipulation(Resource):
 @ns.route('/<int:id>/items/')
 @api.response(401, 'user is not legit')
 class Bucketitems(Resource):
-    """docstring for ClassName"""
+    """This class handles the creation of bucketitems"""
     @api.header('Authorization', 'JWT Token', required=True)
     @api.response(201, 'bucketitem sucessfully created')
     @api.marshal_with(bucket_item, code=201)
     @api.expect(bucket_input)
     def post(self, id):
+        """Handle POST request for this resource. 
+            Url ---> /bucketlists/<id>/items/"""
         # Get the access token from the header
         access_token = request.headers.get('Authorization')
         post_data = request.json
@@ -201,11 +211,13 @@ class Bucketitems(Resource):
 @ns.route('/<int:id>/items/<int:item_id>')
 @api.response(401, 'user is not legit')
 class BucketItemManipulation(Resource):
-    """docstring for ClassName"""
+    """This class handles the deletetion and update of a bucketitem by ID"""
 
     @api.response(404, 'bucketitem not found')
     @api.header('Authorization', 'JWT Token', required=True)
     def delete(self, id, item_id):
+        """Handle POST request for this resource. 
+            Url ---> /bucketlists/<id>/items/"""
         # get the access token from the authorization header
         access_token = request.headers.get('Authorization')
 
@@ -235,6 +247,8 @@ class BucketItemManipulation(Resource):
     @api.marshal_with(bucket_item)
     @api.header('Authorization', 'JWT Token', required=True)
     def put(self, id, item_id):
+        """Handle POST request for this resource. 
+            Url ---> /bucketlists/<id>/items/"""
         # get the access token from the authorization header
         access_token = request.headers.get('Authorization')
 
