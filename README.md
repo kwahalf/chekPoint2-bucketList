@@ -1,1 +1,2 @@
+[![Coverage Status](https://coveralls.io/repos/github/kwahalf/chekPoint2-bucketList/badge.svg?branch=develop)](https://coveralls.io/github/kwahalf/chekPoint2-bucketList?branch=develop)
 # chekPoint2-bucketList
