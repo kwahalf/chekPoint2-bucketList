@@ -65,6 +65,6 @@ the the url being served by the development server on your browser and off you g
 ## Testing
 You can run the tests 
 ``` 
-python manage.py runserver
+python manage.py test
 ```
 
