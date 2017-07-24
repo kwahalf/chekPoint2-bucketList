@@ -53,7 +53,7 @@ the the url being served by the development server on your browser and off you g
 |  `/auth/login/` | `POST` | Login and retrieve token|
 | `/bucketlists/` | `POST` | Create a new Bucketlist |
 | `/bucketlists/` | `GET` | Retrieve all bucketlists for user |
-| `/bucketlists/?page=1&limit=3/` | `GET` | Retrieve three bucketlists per page |
+| `/bucketlists/?page=1&per_page=3/` | `GET` | Retrieve three bucketlists per page |
  `/bucketlists/?q=name/` | `GET` | searches a bucketlist by the name|
 | `/bucketlists/<id>/` | `GET` |  Retrieve a bucketlist by ID|
 | `/bucketlists/<id>/` | `PUT` | Update a bucketlist |
@@ -63,5 +63,8 @@ the the url being served by the development server on your browser and off you g
 | `/bucketlists/<id>/items/<item_id>/` | `PUT`| update a bucketlist item details|
 
 ## Testing
-You can run the tests ``` python manage.py runserver
+You can run the tests 
+``` 
+python manage.py runserver
+```
 
