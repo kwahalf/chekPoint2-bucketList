@@ -26,7 +26,7 @@ class Bucketlists(Resource):
                 # Attempt to decode the token and get the User ID
                 user_id = User.decode_token(access_token)
                 if not isinstance(user_id, str):
-                    name = post_data['name']
+                    name = post_data.get('name')
                     bucketlist = Bucketlist(name=name, created_by = user_id)
                     bucketlist.save()
                     return bucketlist, 201
@@ -51,7 +51,7 @@ class Bucketlists(Resource):
                     # GET all the bucketlists created by this user
                     args = pagination_and_search_arguments.parse_args(request)
                     page = args.get('page', 1)
-                    per_page = args.get('per_page', 10)
+                    per_page = args.get('per_page', 20)
                     q = args.get('q')
                     if q:
                         bucketlists = Bucketlist.query.filter_by(created_by=user_id).filter(Bucketlist.name.ilike('%'+q+'%')).paginate(page, per_page, False)
@@ -136,7 +136,7 @@ class BucketlistsManipulation(Resource):
                     abort(404)
 
                 # Obtain the new name of the bucketlist from the request data
-                name = request.json['name']
+                name = request.json.get('name')
 
                 bucketlist.name = name
                 bucketlist.save()
@@ -202,7 +202,7 @@ class Bucketitems(Resource):
                 user_id = User.decode_token(access_token)
                 #use = User.query.filter_by(id=user_id).first()
                 if not isinstance(user_id, str):
-                    name = post_data['name']
+                    name = post_data.get('name')
                     bucketitem = BucketItem(name=name, bucket_id=id)
                     bucketitem.save()
                     return bucketitem, 201
@@ -266,9 +266,10 @@ class BucketItemManipulation(Resource):
                     abort(404)
 
                 # Obtain the new name of the bucketlist from the request data
-                name = request.json['name']
-                done = request.json['done']
-
+                name = request.json.get('name')
+                done = request.json.get('done')
+                if not done:
+                    done = False
                 bucketitem.name = name
                 bucketitem.done = done
                 bucketitem.save()

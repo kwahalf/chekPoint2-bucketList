@@ -21,8 +21,8 @@ class Registration(Resource):
 
         # Query to see if the user already exists
         post_data=request.json
-        email = post_data['email']
-        password = post_data['password']
+        email = post_data.get('email')
+        password = post_data.get('password')
 
         user = User.query.filter_by(email=email).first()
         if not user:
@@ -65,8 +65,8 @@ class Login(Resource):
         try:
             # Get the user object using their email (unique to every user)
             post_data=request.json
-            email = post_data['email']
-            password = post_data['password']
+            email = post_data.get('email')
+            password = post_data.get('password')
             user = User.query.filter_by(email=email).first()
 
             # Try to authenticate the found user using their password
