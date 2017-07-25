@@ -34,7 +34,7 @@ bucket_input = api.model('input', {
 
 edit_bucket_item = api.model('edit', {
     'name': fields.String(required=True, description='name of bucketlist or bucket item'),
-    'done': fields.Boolean(required=True, description='status of the bucketlist item'),
+    'done': fields.Boolean(required=False, description='status of the bucketlist item'),
 })
 
 bucket_item = api.model('item', {
