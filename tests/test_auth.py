@@ -41,7 +41,7 @@ class AuthTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 201)
         second_res = self.client.post('/auth/register', data=json.dumps(self.user_data),
                                headers = {'content-type': 'application/json'})
-        self.assertEqual(second_res.status_code, 202)
+        self.assertEqual(second_res.status_code, 409)
         # get the results returned in json format
         result = json.loads(second_res.data)
         self.assertEqual(
