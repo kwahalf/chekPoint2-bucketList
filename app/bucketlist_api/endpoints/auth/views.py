@@ -10,7 +10,7 @@ ns = api.namespace('auth', description='Operations related to user authenticatio
 # Define the path for the registration url --->  /auth/register
 @ns.route('/register')
 @api.response(401, 'error occured during registration')
-@api.response(202, 'user already exists')
+@api.response(409, 'user already exists')
 class Registration(Resource):
     """This class registers a new user."""
     
@@ -50,7 +50,7 @@ class Registration(Resource):
                 'message': 'User already exists. Please login.'
             }
 
-            return response, 202
+            return response, 409
 
 @ns.route('/login')
 @api.response(401, 'Invalid email or password')
