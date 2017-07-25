@@ -89,7 +89,7 @@ class Bucketlist(db.Model):
         onupdate=db.func.current_timestamp())
     created_by = db.Column(db.Integer, db.ForeignKey(User.id))
     bucketitems = db.relationship(
-        'BucketItem', order_by='BucketItem.id', cascade="all, delete-orphan")
+        'BucketItem', order_by='BucketItem.id', backref = "owner", lazy='dynamic', cascade="all, delete-orphan")
 
     def __init__(self, name, created_by):
         """initialize with name."""
