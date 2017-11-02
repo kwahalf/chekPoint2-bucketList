@@ -1,0 +1,7 @@
+*.pyc
+.cache
+__pycache__
+bucketenv/
+.DS_Store
+migrations/
+.coverage
