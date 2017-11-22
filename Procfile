@@ -1,3 +1,2 @@
-web gunicorn app: python manage.py db init && python manage.py db migrate && python manage.py db upgrade && python manage.py runserver
-
-
+web gunicorn run:app
+release python manage.py db init && python manage.py db migrate && python manage.py db upgrade
